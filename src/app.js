@@ -49,9 +49,17 @@ backend.use(express.static(publicPath));
 
     /*********** /weather **************/
     backend.get('/weather',(request,response)=>{
+
+        if(!request.query.coords){
+            return response.send({
+                error: 'you must provide coordinates'
+            })
+        }
+        console.log(request.query.coords)
         response.send({
-            "location":"Montreal, QC",
-            "forcast":"Cloudy"
+            location: 'Montreal, QC',
+            forcast: 'Cloudy',
+            coords: request.query.coords
         })
     });
 
