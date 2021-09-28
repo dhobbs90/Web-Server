@@ -7,6 +7,13 @@ const backend = express()
 const port = 3000;
 const publicPath = path.join(__dirname,'../public')
 
+//set hbs(handlebars for express) as our express view engine to allow templating
+backend.set('view engine','hbs')
+
+//set our views directory to Web-Server/views
+backend.set('views',path.join(__dirname,'../views'))
+
+console.log(__dirname)
 //mount the /webserver/public file structure
 backend.use(express.static(publicPath));
 
@@ -16,7 +23,7 @@ backend.use(express.static(publicPath));
 
     /*********** webroot **************/
     backend.get('',(request,response)=>{
-        response.sendFile(path.join(publicPath,'/html/index.html'))
+        response.render('index')
     });
 
     /*********** /weather **************/
