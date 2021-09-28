@@ -60,7 +60,15 @@ backend.use(express.static(publicPath));
         response.sendFile(path.join(publicPath,'/html/about.html'))
     });
 
-    /*********** 404 Error ********** */
+    /*********** /help 404 Error **********/
+    backend.get('/help/*',(request,response)=>{
+        response.render('error',{
+            title: 'weather app - help - page not found',
+            header: '/help/* 404 page not found',
+            body: 'sorry :\'('
+        })
+    });
+    /*********** catch all 404 Error ********/
     backend.get('*',(request,response)=>{
         response.render('error',{
             title: 'weather app - page not found',
