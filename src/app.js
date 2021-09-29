@@ -45,7 +45,7 @@ backend.use(express.static(publicPath));
 
     /*********** /help **************/
     backend.get('/help',(request,response)=>{
-        response.render('index',{
+        response.render('help',{
             title: 'weather app - help',
             header: 'this is a helpful page',
             body: 'this is some helpful text'
@@ -68,9 +68,10 @@ backend.use(express.static(publicPath));
         }
 
         console.log(request.query.coords)
-        
-        forcast(request.query.coords, process.env.API_KEY, (error, data) => {
 
+
+        //call the weatherstack api and get our forcast data back
+        forcast(request.query.coords, process.env.API_KEY, (error, data) => {
             if(error){
                 return response.send({
                     error: error

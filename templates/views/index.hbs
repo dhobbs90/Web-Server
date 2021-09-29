@@ -2,12 +2,17 @@
 <html>
     <head>  
             <link rel="stylesheet" href="css/style.css">
-            <script src="js/client.js"></script>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
             {{>title}}
             {{>header}}
     </head>
     <body>
         {{>body}}
+        <div id="weatherform">
+            <input type="text" placeholder="Longitude" id="txtlongitude"><br>
+            <input type="text" placeholder="Latitude" id="txtlatitude"><br>
+            <button id ="btnsubmit">Submit</button>
+        </div>
     </body>
+    <script src="js/client.js"></script>
 </html>
