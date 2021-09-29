@@ -2,6 +2,11 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const forcast = require('../utils/forcast')
+const verifyApiKey = require('../utils/verifyApiKey')
+
+//load .env enviroment variables
+require('dotenv').config();
 
 //constants
 const backend = express()
@@ -55,6 +60,13 @@ backend.use(express.static(publicPath));
                 error: 'you must provide coordinates'
             })
         }
+
+        if(!verifyApiKey()){
+            return response.send({
+                error: 'the weatherstack api key is not configured on the server'
+            })
+        }
+
         console.log(request.query.coords)
         response.send({
             location: 'Montreal, QC',
