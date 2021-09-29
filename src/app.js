@@ -68,10 +68,20 @@ backend.use(express.static(publicPath));
         }
 
         console.log(request.query.coords)
-        response.send({
-            location: 'Montreal, QC',
-            forcast: 'Cloudy',
-            coords: request.query.coords
+        
+        forcast(request.query.coords, process.env.API_KEY, (error, data) => {
+
+            if(error){
+                return response.send({
+                    error: error
+                })
+            }
+            
+            response.send({
+                tempature: data.tempature,
+                forcast: data.forcast,
+                coords: request.query.coords
+            })
         })
     });
 

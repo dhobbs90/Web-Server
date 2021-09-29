@@ -13,15 +13,16 @@ const forcast = (coords, apikey, callback) => {
 
     //retrieve weather data from api.weatherstack.com with axios
     axios.get(apiCallString)
-        .then(function (response) {
+        .then((response) => {
             callback(undefined,{
                 forcast: response.data.current.weather_descriptions[0],
                 tempature: response.data.current.temperature
             })
         })
-        .catch(function (error) {
-            callback(error);
-        },undefined);
+        .catch((error) => {
+            console.log(error)
+            callback(error,undefined);
+        });
 }
 
 module.exports = forcast
