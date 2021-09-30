@@ -17,7 +17,6 @@ require('dotenv').config();
 const app = express()
 const port = process.env.PORT | 3000;
 
-
 //paths used in express config
 const publicPath = path.join(__dirname,'../public')
 const viewsPath = path.join(__dirname,'../templates/views')
@@ -37,7 +36,6 @@ app.use('/help', help);
 app.use('/weather',  weather);
 app.use('/about', about);
 app.use('*',  error);
-
 
 //initialize our web server
 app.listen(port, ()=>{

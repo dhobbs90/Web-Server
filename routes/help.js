@@ -1,3 +1,4 @@
+//imports
 var express = require('express');
 
 var router = express.Router();
@@ -11,7 +12,7 @@ router.get('/',(request,response)=>{
     })
 });
 
-/*********** /help 404 Error **********/
+/*********** /help/* 404 Error **********/
 router.get('/*',(request,response)=>{
     response.render('error',{
         title: 'weather app - help - page not found',

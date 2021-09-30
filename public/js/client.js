@@ -1,5 +1,6 @@
 console.log("Client Side log")
 
+//submit button clicked
 document.getElementById("btnsubmit").addEventListener("click", () =>{
 
     //get our coordinates from the user
