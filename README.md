@@ -12,9 +12,9 @@ the returned json data to the client
 - Axios<br>
 
 **Functional endpoints:**
- - /         = prompts the user for lat+long then allows them to submit<br>
- - /about    = Information about the site & its creator<br>
- - /help     = Help resources<br>
- - /weather  = endpoint that handlers calls to weatherstack api<br>
- - /*        = 404 error handling for undefined pages<br>
+ - / - prompts the user for lat+long then allows them to submit<br>
+ - /about - Information about the site & its creator<br>
+ - /help - Help resources<br>
+ - /weather - endpoint that handlers calls to weatherstack api<br>
+ - /* - 404 error handling for undefined pages<br>
 
