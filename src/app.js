@@ -9,7 +9,7 @@ const verifyApiKey = require('../utils/verifyApiKey')
 require('dotenv').config();
 
 //constants
-const backend = express()
+const app = express()
 const port = 3000;
 
 
@@ -18,24 +18,20 @@ const publicPath = path.join(__dirname,'../public')
 const viewsPath = path.join(__dirname,'../templates/views')
 const partialsPath = path.join(__dirname,'../templates/partials')
 
-//set hbs(handlebars for express) as our express view engine to allow templating
-backend.set('view engine','hbs')
-
-//set our views directory
-backend.set('views',viewsPath)
-
-//register our partials path with hbs
+//configure hbs(handlebars for express) to handle our html templates
+app.set('view engine','hbs')
+app.set('views',viewsPath)
 hbs.registerPartials(partialsPath)
 
-//mount the /webserver/public file structure
-backend.use(express.static(publicPath));
+//mount /Web-Server/public to expose our public resources(css,client js,etc)
+app.use(express.static(publicPath));
 
 /***************************************
     endpoint handling
 ****************************************/
 
     /*********** webroot **************/
-    backend.get('',(request,response)=>{
+    app.get('',(request,response)=>{
         response.render('index',{
             title: 'weather app',
             header: 'Welcome to a weåther app',
@@ -44,7 +40,7 @@ backend.use(express.static(publicPath));
     });
 
     /*********** /help **************/
-    backend.get('/help',(request,response)=>{
+    app.get('/help',(request,response)=>{
         response.render('help',{
             title: 'weather app - help',
             header: 'this is a helpful page',
@@ -53,7 +49,7 @@ backend.use(express.static(publicPath));
     });
 
     /*********** /weather **************/
-    backend.get('/weather',(request,response)=>{
+    app.get('/weather',(request,response)=>{
 
         if(!request.query.coords){
             return response.send({
@@ -87,12 +83,12 @@ backend.use(express.static(publicPath));
     });
 
     /*********** /about **************/
-    backend.get('/about',(request,response)=>{
+    app.get('/about',(request,response)=>{
         response.sendFile(path.join(publicPath,'/html/about.html'))
     });
 
     /*********** /help 404 Error **********/
-    backend.get('/help/*',(request,response)=>{
+    app.get('/help/*',(request,response)=>{
         response.render('error',{
             title: 'weather app - help - page not found',
             header: '/help/* 404 page not found',
@@ -100,7 +96,7 @@ backend.use(express.static(publicPath));
         })
     });
     /*********** catch all 404 Error ********/
-    backend.get('*',(request,response)=>{
+    app.get('*',(request,response)=>{
         response.render('error',{
             title: 'weather app - page not found',
             header: '404 page not found',
@@ -112,6 +108,6 @@ backend.use(express.static(publicPath));
 ****************************************/
 
 //initialize our web server
-backend.listen(port, ()=>{
+app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`)
 });
