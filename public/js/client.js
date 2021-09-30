@@ -15,7 +15,7 @@ document.getElementById("btnsubmit").addEventListener("click", () =>{
     console.log(`lat:${lat}`)
     console.log(weatherUrl)
     
-    //make our api call
+    //make our api call and log the returned json data to console
     fetch(weatherUrl).then((response) => {
         response.json().then((data) =>{
             console.log(data)
