@@ -18,7 +18,7 @@ the returned json data to the client
  - /weather - endpoint that handlers calls to weatherstack api<br>
  - /* - 404 error handling for undefined pages<br>
 
-**Future improvements** "TO-DO"
+**Future improvements** - "TO-DO"
  - add api security to our /weather endpoint
  - develop the frontend with a framework
  - expose more of the weatherstack.com json data to the user
