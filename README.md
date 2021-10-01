@@ -21,7 +21,7 @@ the returned json data to the client
 **Future improvements** - "TO-DO"
  - add api security to our /weather endpoint
  - develop the frontend with a framework
- - expose more of the weatherstack.com json data to the user
+ - expand the client js to display our json data
  - simplify the json data binding from forcast() -> /weather route. Seems redundant
  - switch prompt from coordinates to a location/city lookup
  - Implement mongodb to log requests to the /weather endpoint(ip,date+time,api security identifier)
