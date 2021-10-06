@@ -5,17 +5,17 @@ mongoose.connect('mongodb://localhost:27017/web-server-api',{
 })
 
 const requestSchema = new mongoose.Schema({
-    clientip : String,
-    datetime: Date,
-    accesskey: String,
+    clientip : {type: String, required: true},
+    datetime: {type: Date, required: true},
+    accesskey: {type: String, required: true},
 });
 
 const Request = mongoose.model('Request',requestSchema)
 
 const aRequest = new Request({
     clientip: '172.16.0.0',
-    datetime: '2002-12-09',
-    accesskey: 'H(!ASND(*!U@(Y#BASD'
+    datetime: Date.now(),
+    accesskey: 'H(!TEST(*!U@(Y#BASD'
 })
 
 aRequest.save().then(() =>{
