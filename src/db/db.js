@@ -1,6 +1,16 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/web-server-api',{
+const MONGO_USERNAME = 'webserveradmin';
+const MONGO_PASSWORD = 'webserveradmin';
+const MONGO_HOSTNAME = '127.0.0.1';
+const MONGO_PORT = '27017';
+const MONGO_DB = 'web-server-api';
+const MONGO_AUTH = 'admin';
+
+
+const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+
+mongoose.connect(MONGO_URL,{
     useNewUrlParser: true
 })
 
@@ -17,7 +27,7 @@ const aRequest = new Request({
     datetime: Date.now(),
     accesskey: 'H(!TEST(*!U@(Y#BASD'
 })
-
+ 
 aRequest.save().then(() =>{
     console.log('saved')
 })
