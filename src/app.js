@@ -9,9 +9,21 @@ const express = require('express'),
 //other imports
 const path = require('path')
 const hbs = require('hbs')
+const mongodb = require('./db/db')
 
 //load .env enviroment variables
 require('dotenv').config();
+
+/*
+//try to connect to our database
+mongodb.connect()
+.then(result => {
+    console.log(result)
+})
+.catch(error =>{
+    console.log(error)
+})
+*/
 
 //constants
 const app = express()

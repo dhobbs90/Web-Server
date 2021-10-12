@@ -1,36 +1,63 @@
-const mongoose = require('mongoose')
+//imports
+const mongodb = require('mongodb');
+const requests = require('./schemas/requests')
+
+//setup mongo client
+const mongoClient = mongodb.MongoClient;
 
 const MONGO_USERNAME = 'webserveradmin';
 const MONGO_PASSWORD = 'webserveradmin';
 const MONGO_HOSTNAME = '127.0.0.1';
 const MONGO_PORT = '27017';
 const MONGO_DB = 'web-server-api';
-const MONGO_AUTH = 'admin';
+const MONGO_AUTHSRC = 'admin';
 
+//setup schemas
+const requestSchema = requests.requestSchema;
 
-const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+//Mongo Connect URL
+const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=${MONGO_AUTHSRC}`;
 
-mongoose.connect(MONGO_URL,{
+mongoClient.connect(MONGO_URL,{
     useNewUrlParser: true
 })
 
-const requestSchema = new mongoose.Schema({
-    clientip : {type: String, required: true},
-    datetime: {type: Date, required: true},
-    accesskey: {type: String, required: true},
-});
+//connect to our DB and pass back the db object
+const connect = () => {
+    /*
+    return new Promise((resolve,reject) => {
+        mongodb.connect(MONGO_URL,{
+            useNewUrlParser: true
+        })
+        .then((db) =>{
+            resolve(db);
+        })
+        .catch((error) => {
+            console.log(error)
+            reject(error);
+        }) 
+    })*/
+}
 
-const Request = mongoose.model('Request',requestSchema)
+const insert = (clientIp,accesskey) => {
+    return new Promise((resolve,reject) => {
+        let Request = mongoClient.model('Request',requestSchema)
 
-const aRequest = new Request({
-    clientip: '172.16.0.0',
-    datetime: Date.now(),
-    accesskey: 'H(!TEST(*!U@(Y#BASD'
-})
- 
-aRequest.save().then(() =>{
-    console.log('saved')
-})
-.catch((e)=>{
-    console.log('error',e)
-})
+        let aRequest = new Request({
+            clientip: clientIp,
+            datetime: Date.now(),
+            accesskey: accesskey
+        })
+
+        aRequest.save()
+        .then((result) =>{
+            resolve(result)
+        })
+        .catch((e)=>{
+            console.log('error',e)
+            reject(e)
+        })
+    })
+}
+
+module.exports = connect,insert
