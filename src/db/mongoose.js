@@ -1,9 +1,6 @@
 //imports
-const mongodb = require('mongodb');
-const requests = require('./schemas/requests')
-
-//setup mongo client
-const mongoClient = mongodb.MongoClient;
+const mongoose = require('mongoose');
+//const requests = require('./schemas/requests')
 
 const MONGO_USERNAME = 'webserveradmin';
 const MONGO_PASSWORD = 'webserveradmin';
@@ -13,32 +10,22 @@ const MONGO_DB = 'web-server-api';
 const MONGO_AUTHSRC = 'admin';
 
 //setup schemas
-const requestSchema = requests.requestSchema;
+//const requestSchema = requests.requestSchema;
 
 //Mongo Connect URL
 const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=${MONGO_AUTHSRC}`;
 
-mongoClient.connect(MONGO_URL,{
+mongoose.connect(MONGO_URL,{
     useNewUrlParser: true
 })
+.then(() => {
+    console.log("connected to mongodb")
+})
+.catch((error) => {
+    console.log(error)
+})
 
-//connect to our DB and pass back the db object
-const connect = () => {
-    /*
-    return new Promise((resolve,reject) => {
-        mongodb.connect(MONGO_URL,{
-            useNewUrlParser: true
-        })
-        .then((db) =>{
-            resolve(db);
-        })
-        .catch((error) => {
-            console.log(error)
-            reject(error);
-        }) 
-    })*/
-}
-
+/*
 const insert = (clientIp,accesskey) => {
     return new Promise((resolve,reject) => {
         let Request = mongoClient.model('Request',requestSchema)
@@ -59,5 +46,4 @@ const insert = (clientIp,accesskey) => {
         })
     })
 }
-
-module.exports = connect,insert
+*/
