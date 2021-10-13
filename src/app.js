@@ -8,10 +8,13 @@ const express = require('express'),
 
 //other imports
 const path = require('path')
-const hbs = require('hbs')
+const hbs = require('hbs');
+
+//setup mongoose
+const mongoConnect = require('./db/mongoose');
 
 //setup mongodb and connect
-require('./db/mongoose')
+mongoose = require('./db/mongoose')
 
 //load .env enviroment variables
 require('dotenv').config();
@@ -43,4 +46,5 @@ app.use('*',  error);
 //initialize our web server
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`)
+    mongoConnect();
 });

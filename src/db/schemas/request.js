@@ -12,4 +12,4 @@ requestSchema.methods.getUsersAccessKey = () =>{
     //this.accessKey=getUsersToken();
 } 
 //return the request so it can be created in the model
-module.exports = requestSchema
+module.exports = requestSchema;

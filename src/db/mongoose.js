@@ -1,6 +1,8 @@
 //imports
 const mongoose = require('mongoose');
-//const requests = require('./schemas/requests')
+
+//load .env enviroment variables
+require('dotenv').config();
 
 const MONGO_USERNAME = 'webserveradmin';
 const MONGO_PASSWORD = 'webserveradmin';
@@ -9,12 +11,10 @@ const MONGO_PORT = '27017';
 const MONGO_DB = 'web-server-api';
 const MONGO_AUTHSRC = 'admin';
 
-//setup schemas
-//const requestSchema = requests.requestSchema;
-
 //Mongo Connect URL
 const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=${MONGO_AUTHSRC}`;
-const mongooseConnect = () => {
+
+const mongoConnect = () => {
     mongoose.connect(MONGO_URL,{
         useNewUrlParser: true
     })
@@ -26,6 +26,7 @@ const mongooseConnect = () => {
     })
 }
 
+module.exports = mongoConnect;
 
 /*
 const insert = (clientIp,accesskey) => {
