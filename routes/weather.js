@@ -2,6 +2,7 @@
 var express = require('express');
 const forcast = require('../utils/forcast')
 const verifyApiKey = require('../utils/verifyApiKey')
+const createRequestLog = require('../utils/createRequestLog')
 
 var router = express.Router();
 
@@ -17,7 +18,7 @@ router.get('/',(request,response)=>{
 
     //throw error weatherstack API_KEY was not found in .env
     if(!verifyApiKey()){
-        return response.send({
+            return response.send({
             error: 'the weatherstack api key is not configured on the server'
         })
     }
@@ -35,12 +36,14 @@ router.get('/',(request,response)=>{
                     time: data.time,
                     icon: data.icon
                 })
+                createRequestLog('172.16.0.1',Date.now(),'123456','Success')
             }
         )
         .catch(error => {
             response.send({
                 error: error
             })
+            createRequestLog('172.16.0.1',Date.now(),'123456',error)
         })
     
 });
