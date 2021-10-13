@@ -14,16 +14,18 @@ const MONGO_AUTHSRC = 'admin';
 
 //Mongo Connect URL
 const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=${MONGO_AUTHSRC}`;
+const mongooseConnect = () => {
+    mongoose.connect(MONGO_URL,{
+        useNewUrlParser: true
+    })
+    .then(() => {
+        console.log("connected to mongodb")
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
 
-mongoose.connect(MONGO_URL,{
-    useNewUrlParser: true
-})
-.then(() => {
-    console.log("connected to mongodb")
-})
-.catch((error) => {
-    console.log(error)
-})
 
 /*
 const insert = (clientIp,accesskey) => {
