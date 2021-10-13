@@ -1,3 +1,6 @@
+//load .env enviroment variables
+require('dotenv').config();
+
 //import express and our router endpoints
 const express = require('express'),
         root    = require('../routes/root'),
@@ -6,18 +9,12 @@ const express = require('express'),
         weather   = require('../routes/weather'),
         about   = require('../routes/about');
 
-//other imports
+        //other imports
 const path = require('path')
 const hbs = require('hbs');
 
 //setup mongoose
 const mongoConnect = require('./db/mongoose');
-
-//setup mongodb and connect
-mongoose = require('./db/mongoose')
-
-//load .env enviroment variables
-require('dotenv').config();
 
 //constants
 const app = express()

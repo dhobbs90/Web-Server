@@ -1,11 +1,8 @@
 //imports
 const mongoose = require('mongoose');
 
-//load .env enviroment variables
-require('dotenv').config();
-
 const MONGO_USERNAME = 'webserveradmin';
-const MONGO_PASSWORD = 'webserveradmin';
+const MONGO_PASSWORD = process.env.MONGO_PWD;
 const MONGO_HOSTNAME = '127.0.0.1';
 const MONGO_PORT = '27017';
 const MONGO_DB = 'web-server-api';
